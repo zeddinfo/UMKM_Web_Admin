@@ -105,7 +105,7 @@
         "/api/umkm_terdekat": {
             "post": {
                 "tags": [
-                    "PRODUCT"
+                    "UMKM"
                 ],
                 "summary": "Get List UMKM Terdekat",
                 "description": "Get All List Of UMKM Terdekat",
@@ -153,7 +153,7 @@
         "/api/product/{id}": {
             "get": {
                 "tags": [
-                    "UMKM"
+                    "PRODUCT"
                 ],
                 "summary": "Get Detail Product",
                 "description": "Get Detail Product",
