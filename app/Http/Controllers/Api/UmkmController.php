@@ -12,16 +12,18 @@ class UmkmController extends Controller
     ///helper hitung jarak
     function getDistanceBetweenPointsNew($latitude1, $longitude1, $latitude2, $longitude2, $unit = 'Km')
     {
+        dd($latitude1);
         $theta = $longitude1 - $longitude2;
         $distance = (sin(deg2rad($latitude1)) * sin(deg2rad($latitude2)))  + (cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta)));
         $distance = acos($distance);
         $distance = rad2deg($distance);
         $distance = $distance * 60 * 1.1515;
+        dd(round(($distance * 1.609344)));
         switch ($unit) {
             case 'Mi':
                 break;
             case 'Km':
-                $distance = $distance * 1.609344;
+                $distance = ($distance * 1.609344) * 0.0001;
         }
         return (round($distance, 2));
     }
@@ -123,11 +125,11 @@ class UmkmController extends Controller
     public function umkm_terdekat(Request $request)
     {
         $data = UmkmModel::get();
-        // dd($data);
+        dd($data);
         $response = [];
         foreach ($data as $r) {
 
-            $jarak = $this->getDistanceBetweenPointsNew(floatval($r->latitude), floatval($r->longitude), floatval($request->lat), floatval($request->long));
+            $jarak = $this->getDistanceBetweenPointsNew(floatval($r->laltiude), floatval($r->longitude), floatval($request->lat), floatval($request->long));
 
             if ($jarak <= 5) {
                 $response[] = array(

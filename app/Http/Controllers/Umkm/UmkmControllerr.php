@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UmkmModel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Validator;
 
@@ -31,8 +32,9 @@ class UmkmControllerr extends Controller
                     $file = $path;
                     $fileName = str_replace(' ', '_', $file->getClientOriginalName());
                     $fileName = 'Document_' . date('YmdHis') . '_' . $fileName;
-                    $save = $file->storeAs('public/file/', $fileName);
-                    $pathGbr = URL::to('/') . '/storage/file/' . $fileName;
+                    // $save = $file->storeAs('public/file/', $fileName);
+                    $save = Storage::putFileAs('/gambar', $file, $fileName);
+                    $pathGbr = URL::to('/') . '/public/uploads/gambar/' . $fileName;
 
                     $model->file = $fileName;
                 } else {
